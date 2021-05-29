@@ -8,6 +8,7 @@ def read_file(file_name):
     strokeData = strokeData.dropna()
     strokeData = strokeData[strokeData.smoking_status != 'Unknown']
     strokeData = strokeData.replace(to_replace=['Yes', 'No'], value=[1, 0])
+    strokeData = strokeData.replace(to_replace=['Male', 'Female', 'Other'], value=[1, 0, 0.5])
     return strokeData
 
 def normalize(df):
