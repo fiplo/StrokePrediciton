@@ -12,6 +12,8 @@ def read_file(file_name):
     strokeData = strokeData.replace(to_replace=['Male', 'Female', 'Other'], value=[1, 0, 0.5])
     strokeData = strokeData.replace(to_replace=['smokes', 'never smoked', 'formerly smoked'], value=[1, 0, 0.5])
     strokeData = strokeData.replace(to_replace=['Urban', 'Rural'], value=[1, 0])
+    lb = preprocessing.LabelBinarizer()
+    strokeData['work_type'] = lb.fit_transform(strokeData['work_type'])
     return strokeData
 
 
