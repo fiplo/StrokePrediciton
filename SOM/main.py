@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def train_som(data):
+def train_som(data, amount_of_clusters):
     input_data = pd.DataFrame(data).drop(['stroke'], axis=1).to_numpy()
-    som_shape = (2, 1)
+    som_shape = (amount_of_clusters, 1)
     som = MiniSom(som_shape[0], som_shape[1], input_data.shape[1], sigma=0.5, learning_rate=.5,
                   neighborhood_function='gaussian', random_seed=0)
     som.pca_weights_init(input_data)
@@ -21,3 +21,8 @@ def train_som(data):
 
     plt.legend()
     plt.show()
+
+
+def SOM(data):
+    for cluster_amount in [2, 3, 4]:
+        train_som(data, cluster_amount)

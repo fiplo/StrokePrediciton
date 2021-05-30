@@ -1,10 +1,10 @@
 from shared import *
-from SOM.main import train_som
+from SOM.main import SOM
 
 
 def main():
     data = read_file('./data/healthcare-dataset-stroke-data.csv')
-    train_som(data)
+    SOM(data)
 
 
 if __name__ == "__main__":
