@@ -12,14 +12,19 @@ def train_som(data, amount_of_clusters):
 
 
 def plot_som(data, amount_of_clusters, ax):
-    som = train_som(data, amount_of_clusters)
+    input_data = data.to_numpy()
 
-    predictions = som.predict(data)
-    x = data[:, 0]
-    y = data[:, 1]
+    som = train_som(input_data, amount_of_clusters)
+
+    predictions = som.predict(input_data)
+    x = input_data[:, 0]
+    y = input_data[:, 1]
 
     colors = ['red', 'green', 'blue']
     ax.scatter(x, y, c=predictions, cmap=ListedColormap(colors))
+    ax.set(xlabel=data.columns[0], ylabel=data.columns[1])
+
+    return som, predictions
 
 
 def smo_inertia(data, numarr):

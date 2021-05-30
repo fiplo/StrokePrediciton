@@ -9,7 +9,7 @@ kmeans_kwargs = {
     "init": "random",
     "n_init": 10,
     "max_iter": 300,
-    "random_state"
+    "random_state":42
 }
 
 def returnKmeanClusters(data, n):
@@ -33,10 +33,9 @@ def kmeanSil(data, numarr):
 def plotKmeans(twoDimensionalData, labels, ax):
     u_labels = np.unique(labels)
     for i in u_labels:
-        ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0][0]] ,
-                twoDimensionalData[labels == i][twoDimensionalData.columns[1][0]] , label = i)
-    ax.set(xlabel=twoDimensionalData.columns[0][0], ylabel=twoDimensionalData.columns[1][0])
-    ax.set_title(f"{len(u_labels)} clusters")
+        ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0]] ,
+                twoDimensionalData[labels == i][twoDimensionalData.columns[1]] , label = i)
+    ax.set(xlabel=twoDimensionalData.columns[0], ylabel=twoDimensionalData.columns[1])
 
 def SilhouetteKmeansPlot(twoDimensionalData, n, ax):
     kmeans = returnKmeanClusters(twoDimensionalData, n)
