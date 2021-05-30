@@ -38,11 +38,3 @@ def smo_silhouette_score(data, numarr):
         silhouette_scores.append(silhouette_score(data, predictions))
 
     return silhouette_scores
-
-
-def calculate_centroid_distances(points, predictions, centers):
-    sum = 0
-    for point, prediction in zip(points, predictions):
-        sum += (centers[prediction][0][0] - point[0]) ** 2 + (centers[prediction][0][1] - point[1]) ** 2
-
-    return sum
