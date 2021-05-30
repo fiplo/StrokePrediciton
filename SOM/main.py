@@ -1,28 +1,30 @@
-from minisom import MiniSom
-import numpy as np
-import pandas as pd
+from sklearn_som.som import SOM
+from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 
 
 def train_som(data, amount_of_clusters):
-    input_data = pd.DataFrame(data).drop(['stroke'], axis=1).to_numpy()
     som_shape = (amount_of_clusters, 1)
-    som = MiniSom(som_shape[0], som_shape[1], input_data.shape[1], sigma=0.5, learning_rate=.5,
-                  neighborhood_function='gaussian', random_seed=0)
-    som.pca_weights_init(input_data)
-    som.train(input_data, 1000)
+    som = SOM(m=som_shape[0], n=som_shape[1], dim=2)
+    som.fit(data)
 
-    winner_coordinates = np.array([som.winner(x) for x in input_data]).T
-    cluster_index = np.ravel_multi_index(winner_coordinates, som_shape)
+    return som
 
-    for c in np.unique(cluster_index):
-        plt.scatter(input_data[cluster_index == c, data.columns.get_loc("avg_glucose_level")],
-                    input_data[cluster_index == c, data.columns.get_loc("bmi")], label='cluster=' + str(c), alpha=.7)
 
-    plt.legend()
+def plot_som(data, amount_of_clusters):
+    som = train_som(data, amount_of_clusters)
+
+    predictions = som.predict(data)
+    x = data[:, 0]
+    y = data[:, 1]
+
+    colors = ['red', 'green', 'blue']
+    plt.scatter(x, y, c=predictions, cmap=ListedColormap(colors))
     plt.show()
 
 
-def SOM(data):
-    for cluster_amount in [2, 3, 4]:
-        train_som(data, cluster_amount)
+def smo_inertia(data, numarr):
+    cs = []
+    for i in numarr:
+        cs.append(train_som(data, i).inertia_)
+    return cs

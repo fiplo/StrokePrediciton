@@ -1,6 +1,5 @@
 pandas
 sklearn
-minisom
 numpy
 matplotlib
-yellowbrick
+sklearn_som
