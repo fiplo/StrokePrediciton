@@ -8,5 +8,5 @@ def plot_initial_data(two_dimensional_data):
     plt.scatter(x, y)
     plt.xlabel(two_dimensional_data.columns[0])
     plt.ylabel(two_dimensional_data.columns[1])
-    plt.title("Age and Average Glucose Level visualization")
+    plt.title("BMI and Average Glucose Level visualization")
     plt.savefig('initial_data.png')
