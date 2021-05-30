@@ -9,7 +9,7 @@ def main():
     normalized_data = normalize(data)
     two_dimensional_data = normalized_data[['age', 'avg_glucose_level']]
 
-    clusters_amount = [2, 3, 4]
+    clusters_amount = [2,3,4,5]
     plt.rcParams["figure.figsize"] = (20, 10)
 
     for cluster in clusters_amount:

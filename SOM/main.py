@@ -20,9 +20,10 @@ def plot_som(data, amount_of_clusters, ax):
     x = input_data[:, 0]
     y = input_data[:, 1]
 
-    colors = ['red', 'green', 'blue']
+    colors = ['red', 'green', 'blue', 'yellow', 'orange']
     ax.scatter(x, y, c=predictions, cmap=ListedColormap(colors))
     ax.set(xlabel=data.columns[0], ylabel=data.columns[1])
+    ax.set_title(f"Self Organizing Map ({amount_of_clusters} clusters)")
 
     return som, predictions
 

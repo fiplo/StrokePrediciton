@@ -36,6 +36,7 @@ def plotKmeans(twoDimensionalData, labels, ax):
         ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0]] ,
                 twoDimensionalData[labels == i][twoDimensionalData.columns[1]] , label = i)
     ax.set(xlabel=twoDimensionalData.columns[0], ylabel=twoDimensionalData.columns[1])
+    ax.set_title(f"K-means clustering ({len(u_labels)} clusters)")
 
 def SilhouetteKmeansPlot(twoDimensionalData, n, ax):
     kmeans = returnKmeanClusters(twoDimensionalData, n)
