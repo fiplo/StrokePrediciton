@@ -1,6 +1,6 @@
 from sklearn_som.som import SOM
 from matplotlib.colors import ListedColormap
-import matplotlib.pyplot as plt
+from sklearn.metrics import silhouette_score
 
 
 def train_som(data, amount_of_clusters):
@@ -11,7 +11,7 @@ def train_som(data, amount_of_clusters):
     return som
 
 
-def plot_som(data, amount_of_clusters):
+def plot_som(data, amount_of_clusters, ax):
     som = train_som(data, amount_of_clusters)
 
     predictions = som.predict(data)
@@ -19,12 +19,30 @@ def plot_som(data, amount_of_clusters):
     y = data[:, 1]
 
     colors = ['red', 'green', 'blue']
-    plt.scatter(x, y, c=predictions, cmap=ListedColormap(colors))
-    plt.show()
+    ax.scatter(x, y, c=predictions, cmap=ListedColormap(colors))
 
 
 def smo_inertia(data, numarr):
-    cs = []
+    inertia_points = []
     for i in numarr:
-        cs.append(train_som(data, i).inertia_)
-    return cs
+        inertia_points.append(train_som(data, i).inertia_)
+    return inertia_points
+
+
+def smo_silhouette_score(data, numarr):
+    silhouette_scores = []
+
+    for i in numarr:
+        smo = train_som(data, i)
+        predictions = smo.predict(data)
+        silhouette_scores.append(silhouette_score(data, predictions))
+
+    return silhouette_scores
+
+
+def calculate_centroid_distances(points, predictions, centers):
+    sum = 0
+    for point, prediction in zip(points, predictions):
+        sum += (centers[prediction][0][0] - point[0]) ** 2 + (centers[prediction][0][1] - point[1]) ** 2
+
+    return sum

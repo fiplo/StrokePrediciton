@@ -30,7 +30,7 @@ def kmeanSil(data, numarr):
         sc.append(score)
     return sc
 
-def plotKmeans(twoDimensionalData, labels, ax)
+def plotKmeans(twoDimensionalData, labels, ax):
     u_labels = np.unique(label)
     for i in u_labels:
         ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0][0]] , twoDimensionalData[label == i][twoDimensionalData.columns[1][0]] , label = i)
