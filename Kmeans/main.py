@@ -31,9 +31,10 @@ def kmeanSil(data, numarr):
     return sc
 
 def plotKmeans(twoDimensionalData, labels, ax):
-    u_labels = np.unique(label)
+    u_labels = np.unique(labels)
     for i in u_labels:
-        ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0][0]] , twoDimensionalData[label == i][twoDimensionalData.columns[1][0]] , label = i)
+        ax.scatter(twoDimensionalData[labels == i][twoDimensionalData.columns[0][0]] ,
+                twoDimensionalData[labels == i][twoDimensionalData.columns[1][0]] , label = i)
     ax.set(xlabel=twoDimensionalData.columns[0][0], ylabel=twoDimensionalData.columns[1][0])
     ax.set_title(f"{len(u_labels)} clusters")
 
