@@ -16,8 +16,8 @@ def train_som(data):
     cluster_index = np.ravel_multi_index(winner_coordinates, som_shape)
 
     for c in np.unique(cluster_index):
-        plt.scatter(input_data[cluster_index == c, 6],
-                    input_data[cluster_index == c, 1], label='cluster=' + str(c), alpha=.7)
+        plt.scatter(input_data[cluster_index == c, data.columns.get_loc("avg_glucose_level")],
+                    input_data[cluster_index == c, data.columns.get_loc("bmi")], label='cluster=' + str(c), alpha=.7)
 
     plt.legend()
     plt.show()
