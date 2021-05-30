@@ -3,3 +3,4 @@ sklearn
 minisom
 numpy
 matplotlib
+yellowbrick
