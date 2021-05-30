@@ -4,16 +4,13 @@ from sklearn import preprocessing
 
 def read_file(file_name):
     strokeData = pd.read_csv(file_name)
-    strokeData = strokeData.reset_index().drop('index', axis=1)
-    del strokeData['id']
+    strokeData = strokeData.reset_index().drop(['index', 'id', 'work_type'], axis=1)
     strokeData = strokeData.dropna()
     strokeData = strokeData[strokeData.smoking_status != 'Unknown']
     strokeData = strokeData.replace(to_replace=['Yes', 'No'], value=[1, 0])
     strokeData = strokeData.replace(to_replace=['Male', 'Female', 'Other'], value=[1, 0, 0.5])
     strokeData = strokeData.replace(to_replace=['smokes', 'never smoked', 'formerly smoked'], value=[1, 0, 0.5])
     strokeData = strokeData.replace(to_replace=['Urban', 'Rural'], value=[1, 0])
-    lb = preprocessing.LabelBinarizer()
-    strokeData['work_type'] = lb.fit_transform(strokeData['work_type'])
     return strokeData
 
 
